@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html><html lang='zh-CN'><head><meta charset='UTF-8'><title>💼 业务管理</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f0f2f5;color:#333}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:#001529;color:#fff;z-index:10}
+.sidebar-logo{height:64px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;border-bottom:1px solid rgba(255,255,255,.1)}
+.sidebar-menu{list-style:none;padding:8px 0}
+.sidebar-menu li{padding:12px 24px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;transition:.2s;color:rgba(255,255,255,.65)}
+.sidebar-menu li:hover,.sidebar-menu li.active{background:#1677ff;color:#fff}
+.header{position:fixed;left:220px;right:0;top:0;height:64px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;box-shadow:0 1px 4px rgba(0,0,0,.08);z-index:9}
+.header-left{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+.header-right{display:flex;align-items:center;gap:12px;font-size:13px}
+.avatar{width:32px;height:32px;border-radius:50%;background:#1677ff;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px}
+.content{margin-left:220px;margin-top:64px;padding:24px}
+h2{margin-bottom:20px;font-size:19px}
+.card{background:#fff;border-radius:8px;padding:20px;margin-bottom:16px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat-card{background:#fff;border-radius:8px;padding:18px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.stat-card .label{font-size:12px;color:#888;margin-bottom:6px}
+.stat-card .value{font-size:26px;font-weight:700}
+.blue{color:#1677ff}.green{color:#52c41a}.orange{color:#faad14}.pink{color:#eb2f96}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid #f0f0f0}
+th{background:#fafafa;font-weight:600;color:#555}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;color:#fff}
+.tag-blue{background:#1677ff}.tag-green{background:#52c41a}.tag-orange{background:#faad14}.tag-red{background:#ff4d4f}.tag-purple{background:#722ed1}.tag-gold{background:#faad14;color:#fff}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:6px;font-size:13px;cursor:pointer;border:none}
+.btn-primary{background:#1677ff;color:#fff}
+.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.module-card{padding:18px;background:#fff;border-radius:8px;border-left:3px solid #1677ff;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.module-card .t{font-weight:600;font-size:14px;margin-bottom:4px}
+.module-card .d{font-size:11px;color:#888}
+.c2{border-left-color:#52c41a}.c3{border-left-color:#faad14}.c4{border-left-color:#722ed1}.c5{border-left-color:#eb2f96}.c6{border-left-color:#13c2c2}
+.tabs{display:flex;gap:0;border-bottom:1px solid #f0f0f0;margin-bottom:14px}
+.tabs .tab{padding:9px 18px;cursor:pointer;font-size:13px;color:#666;border-bottom:2px solid transparent}
+.tabs .tab.active{color:#1677ff;border-bottom-color:#1677ff;font-weight:500}
+.progress-bar{height:5px;background:#f0f0f0;border-radius:3px;overflow:hidden;width:100px}
+.progress-bar .fill{height:100%;background:#1677ff;border-radius:3px}
+.flex-between{display:flex;justify-content:space-between;align-items:center}
+.gap-8{display:flex;gap:8px}</style></head><body><div class='sidebar'><div class='sidebar-logo'>企业管理平台</div><ul class='sidebar-menu'><li>📊 工作台</li><li>🎯 战略管理</li><li class='active'>💼 业务管理</li><li>📦 产品管理</li><li>💰 财务管理</li><li>👥 人才管理</li><li>🚚 供应链</li></ul></div><div class='header'><div class='header-left'>💼 业务管理</div><div class='header-right'>🔔 <span class='avatar'>张</span> 张管理</div></div><div class='content'><h2>业务管理中心</h2>
+<div class="card">
+  <div class="tabs">
+    <div class="tab active">客户管理</div>
+    <div class="tab">线索管理</div>
+    <div class="tab">商机管道</div>
+    <div class="tab">订单管理</div>
+  </div>
+  <div class="flex-between" style="margin-bottom:12px"><span style="font-weight:500">客户列表 (1286)</span><button class="btn btn-primary">+ 新建客户</button></div>
+  <table>
+    <tr><th>客户名称</th><th>行业</th><th>等级</th><th>联系人</th><th>电话</th><th>订单总额</th></tr>
+    <tr><td>华为技术有限公司</td><td>信息技术</td><td><span class="tag tag-gold">VIP</span></td><td>王总</td><td>138****8888</td><td style="font-weight:600">¥1,280万</td></tr>
+    <tr><td>比亚迪股份有限公司</td><td>新能源汽车</td><td><span class="tag tag-orange">金牌</span></td><td>李经理</td><td>139****6666</td><td style="font-weight:600">¥960万</td></tr>
+    <tr><td>阿里巴巴集团</td><td>互联网</td><td><span class="tag tag-blue">银牌</span></td><td>赵主管</td><td>137****9999</td><td style="font-weight:600">¥540万</td></tr>
+    <tr><td>恒通光电有限公司</td><td>光通信</td><td><span class="tag tag-orange">金牌</span></td><td>陈总</td><td>136****3333</td><td style="font-weight:600">¥420万</td></tr>
+    <tr><td>杰克缝纫机股份</td><td>智能制造</td><td><span class="tag tag-gold">VIP</span></td><td>刘工</td><td>135****2222</td><td style="font-weight:600">¥380万</td></tr>
+  </table>
+</div></div></body></html>

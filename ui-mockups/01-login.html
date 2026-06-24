@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>登录 - 企业管理平台</title><style>*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#f0f2f5;color:#333}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:#001529;color:#fff;z-index:10}
+.sidebar-logo{height:64px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;border-bottom:1px solid rgba(255,255,255,.1)}
+.sidebar-menu{list-style:none;padding:8px 0}
+.sidebar-menu li{padding:12px 24px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:14px;transition:all .2s}
+.sidebar-menu li:hover,.sidebar-menu li.active{background:#1677ff}
+.sidebar-menu li .icon{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+.header{position:fixed;left:220px;right:0;top:0;height:64px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 24px;box-shadow:0 1px 4px rgba(0,0,0,.08);z-index:9}
+.header-left{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:600}
+.header-right{display:flex;align-items:center;gap:8px}
+.avatar{width:36px;height:36px;border-radius:50%;background:#1677ff;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
+.content{margin-left:220px;margin-top:64px;padding:24px;min-height:calc(100vh - 64px)}
+h2{margin-bottom:24px;font-size:20px}
+.card{background:#fff;border-radius:8px;padding:24px;margin-bottom:16px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat-card{background:#fff;border-radius:8px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.stat-card .label{font-size:13px;color:#888;margin-bottom:8px}
+.stat-card .value{font-size:28px;font-weight:700}
+.stat-card .value.blue{color:#1677ff}.stat-card .value.green{color:#52c41a}.stat-card .value.orange{color:#faad14}.stat-card .value.pink{color:#eb2f96}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid #f0f0f0}
+th{background:#fafafa;font-weight:600;color:#555}
+.tag{display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;color:#fff}
+.tag-blue{background:#1677ff}.tag-green{background:#52c41a}.tag-orange{background:#faad14}.tag-purple{background:#722ed1}.tag-cyan{background:#13c2c2}
+.tag-outline{background:transparent;border:1px solid #d9d9d9;color:#666}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border-radius:6px;font-size:14px;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:#1677ff;color:#fff}.btn-primary:hover{background:#4096ff}
+.btn-outline{border:1px solid #d9d9d9;background:#fff;color:#333}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;margin-bottom:6px;font-size:13px;color:#555;font-weight:500}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:8px 12px;border:1px solid #d9d9d9;border-radius:6px;font-size:14px;outline:none;transition:border .2s}
+.form-group input:focus,.form-group select:focus{border-color:#1677ff;box-shadow:0 0 0 2px rgba(22,119,255,.1)}
+.login-bg{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;min-height:100vh}
+.login-card{background:#fff;border-radius:12px;padding:40px;width:400px;box-shadow:0 8px 32px rgba(0,0,0,.15);text-align:center}
+.login-card h1{font-size:24px;margin-bottom:32px;font-weight:700}
+.login-card .form-group{margin-bottom:20px}
+.login-card input{padding:10px 14px;font-size:15px}
+.login-card .btn{width:100%;padding:12px;font-size:16px;justify-content:center}
+.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.module-card{padding:20px;background:#fff;border-radius:8px;border-left:3px solid #1677ff;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.module-card .title{font-weight:600;margin-bottom:6px}
+.module-card .desc{font-size:12px;color:#888}
+.module-card.c2{border-left-color:#52c41a}.module-card.c3{border-left-color:#faad14}
+.module-card.c4{border-left-color:#722ed1}.module-card.c5{border-left-color:#eb2f96}.module-card.c6{border-left-color:#13c2c2}
+.tabs{display:flex;gap:0;border-bottom:1px solid #f0f0f0;margin-bottom:16px}
+.tabs .tab{padding:10px 20px;cursor:pointer;font-size:14px;color:#666;border-bottom:2px solid transparent;transition:all .2s}
+.tabs .tab.active{color:#1677ff;border-bottom-color:#1677ff;font-weight:500}
+.progress-bar{height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden}
+.progress-bar .fill{height:100%;background:#1677ff;border-radius:3px}
+.flex-between{display:flex;justify-content:space-between;align-items:center}
+.gap-12{display:flex;gap:12px}
+.notification{position:relative;display:inline-flex;align-items:center}
+.notification .badge{position:absolute;top:-4px;right:-8px;background:#ff4d4f;color:#fff;font-size:10px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.metric-item{text-align:center;padding:12px;background:#fafafa;border-radius:6px}
+.metric-item .num{font-size:22px;font-weight:700;color:#1677ff}
+.metric-item .lbl{font-size:12px;color:#888;margin-top:4px}
+.grade-A{background:#faad14;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px}
+.grade-B{background:#1677ff;color:#fff;padding:2px 8px;border-radius:4px;font-size:12px}
+.stars{color:#faad14}
+.progress-cell{display:flex;align-items:center;gap:8px}
+.progress-cell span{font-size:12px;color:#888;min-width:36px}
+.nav-crumb{font-size:13px;color:#888;margin-bottom:16px}
+.nav-crumb span{color:#1677ff}</style></head>
+<body class="login-bg">
+<div class="login-card">
+  <h1>📊 企业管理平台</h1>
+  <div class="form-group"><label>用户名</label><input type="text" value="admin" placeholder="请输入用户名"></div>
+  <div class="form-group"><label>密码</label><input type="password" value="········" placeholder="请输入密码"></div>
+  <button class="btn btn-primary" style="width:100%">登 录</button>
+  <p style="margin-top:16px;font-size:12px;color:#aaa">Enterprise Management Platform v1.0</p>
+</div>
+</body></html>
