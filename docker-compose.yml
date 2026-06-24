@@ -1,25 +1,76 @@
-﻿version: "3.9"
+# 鲸祺集团统一运营平台 - Docker Compose 配置
+# 使用方法: docker-compose up -d
 
 services:
+  # ---- 数据库 ----
+  postgres:
+    image: postgres:16-alpine
+    container_name: jq-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: enterprise
+      POSTGRES_USER: jqadmin
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-jq_enterprise_2026}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jqadmin -d enterprise"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - jq-net
+
+  # ---- 后端 API ----
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: jq-platform-backend:latest
+    container_name: jq-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://jqadmin:${DB_PASSWORD:-jq_enterprise_2026}@postgres:5432/enterprise
+      - SECRET_KEY=${SECRET_KEY:-jq-platform-secret-key-change-in-production}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=1440
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost}
+      - APP_NAME=鲸祺集团统一运营平台
+      - APP_VERSION=1.0.0
+    volumes:
+      - backend_data:/app/data
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_URL=sqlite+aiosqlite:///./enterprise.db
-      - SECRET_KEY=change-me-in-production
-    volumes:
-      - ./backend:/app
-      - backend_data:/app/data
-    restart: unless-stopped
+    networks:
+      - jq-net
 
+  # ---- 前端 Nginx ----
   frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: jq-platform-frontend:latest
+    container_name: jq-frontend
+    restart: unless-stopped
     depends_on:
       - backend
-    restart: unless-stopped
+    ports:
+      - "3000:80"
+    networks:
+      - jq-net
 
 volumes:
+  pgdata:
+    name: jq_pgdata
   backend_data:
+    name: jq_backend_data
+
+networks:
+  jq-net:
+    name: jq_network
+    driver: bridge
